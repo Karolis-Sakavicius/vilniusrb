@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+  <img class="me-3" src="../assets/brand/bootstrap-logo-white.svg" alt="" width="48" height="38">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">How do you like VilniusRB?</h1>
+    <small>Share your thoughts</small>
+  </div>
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-0">
+    <h6 class="mb-0">Posts</h6>
+    <%= link_to "Back", v1_posts_path, class: 'btn btn-sm btn-secondary' %>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="<%= @current_user.color %>"/></svg>
+
+    <%= form_with url: v1_posts_path, method: :post, class: 'w-100' do |form| %>
+      <strong class="d-block pb-2 mb-0 small lh-sm text-gray-dark">@<%= @current_user.username %></strong>
+
+      <span class="d-block pb-2 mb-0 text-danger fw-bold"><%= @post&.errors&.messages&.dig(:base)&.join %></span>
+
+      <div class="form-group mb-2">
+        <%= form.text_field :text, class: 'form-control', placeholder: 'Tell me your thoughts!', value: @post&.text %>
+        <small class="form-text text-danger"><%= @post&.errors&.messages&.dig(:text)&.join %></small>
+      </div>
+
+      <%= form.submit(class: 'btn btn-success') { 'Save!' } %>
+    <% end %>
+  </div>
+</div>
