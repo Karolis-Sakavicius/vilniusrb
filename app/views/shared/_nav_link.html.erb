@@ -1,0 +1,1 @@
+<%= link_to(path, class: "nav-link #{Rails.application.routes.recognize_path(path)[:controller] == controller_path ? 'active' : ''}") { name } %>
