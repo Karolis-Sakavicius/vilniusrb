@@ -10,7 +10,7 @@
     <%= render @posts %>
 
     <small class="d-block text-end mt-3">
-      Posts count: <%= Post.count %>
+      Posts count: <span id="post_count"><%= Post.count %></span>
     </small>
   </div>
 </turbo-frame>

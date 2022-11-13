@@ -41,7 +41,9 @@ module V3
     def destroy
       @post = Post.find(params[:id]).destroy!
 
-      redirect_to '/v3/posts'
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
 
     private
