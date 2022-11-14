@@ -1,16 +1,19 @@
 <%= render 'header' %>
 
-<turbo-frame id="posts">
-  <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-0">
-      <h6 class="mb-0">Posts</h6>
-      <%= link_to "Add new post", new_v2_post_path, class: 'btn btn-sm btn-info', data: {turbo_action: 'advance'} %>
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-0">
+    <h6 class="mb-0">Posts</h6>
+    <div id="actions">
+      <%= link_to "Add new post", new_v3_post_path, class: 'btn btn-sm btn-info', data: {turbo_frame: 'new_post', turbo_action: 'advance'} %>
     </div>
-
-    <%= render @posts %>
-
-    <small class="d-block text-end mt-3">
-      Posts count: <span id="post_count"><%= Post.count %></span>
-    </small>
   </div>
-</turbo-frame>
+
+  <turbo-frame id="new_post"></turbo-frame>
+  <turbo-frame id="posts">
+    <%= render @posts %>
+  </turbo-frame>
+
+  <small class="d-block text-end mt-3">
+    Posts count: <span id="post_count"><%= Post.count %></span>
+  </small>
+</div>

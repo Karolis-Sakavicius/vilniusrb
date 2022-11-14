@@ -18,9 +18,11 @@ module V3
       @post = Post.new(post_params.merge(participant: @current_user))
 
       if @post.save
-        redirect_to '/v3/posts'
+        respond_to do |format|
+          format.turbo_stream
+        end
       else
-        render '/v3/posts/new', status: :unprocessable_entity
+        render '/v3/posts/new', format: :html, status: :unprocessable_entity
       end
     end
 

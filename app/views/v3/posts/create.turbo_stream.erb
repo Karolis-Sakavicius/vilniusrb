@@ -1,0 +1,16 @@
+<turbo-stream action="prepend" target="posts">
+  <template>
+    <%= render partial: 'post', locals: {post: @post}, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="post_count">
+  <template>
+    <%= Post.count %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="new_post">
+  <template>
+  </template>
+</turbo-stream>
