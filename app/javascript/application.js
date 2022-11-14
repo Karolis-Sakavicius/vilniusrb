@@ -3,11 +3,3 @@ import "@hotwired/turbo-rails"
 import "bootstrap"
 import "@popperjs/core"
 import "controllers"
-
-(function () {
-  'use strict'
-
-  document.querySelector('#navbarSideCollapse').addEventListener('click', function () {
-    document.querySelector('.offcanvas-collapse').classList.toggle('open')
-  })
-})()
