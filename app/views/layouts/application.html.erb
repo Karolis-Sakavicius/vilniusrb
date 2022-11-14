@@ -10,6 +10,18 @@
     <%= javascript_importmap_tags %>
   </head>
 
+<style> 
+div {
+  animation-name: example;
+  animation-duration: 1s;
+}
+
+@keyframes example {
+  from {background-color: red;}
+  to {background-color: initial;}
+}
+</style>
+
   <body>
   <body class="bg-light">
     <%= render 'shared/navigation' %>
