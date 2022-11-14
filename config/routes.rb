@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   namespace :v3 do
     resources :posts
   end
+
+  namespace :v4 do
+    resources :posts
+  end
 end

@@ -1,0 +1,19 @@
+<turbo-frame id="<%= dom_id(post) %>">
+  <div class="d-flex text-muted pt-3">
+    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="<%= post.participant.color %>"/></svg>
+
+    <div class="d-flex justify-content-between border-bottom w-100 pb-3 align-items-center">
+      <div class="small lh-sm">
+        <strong class="d-block text-gray-dark mb-1">@<%= post.participant.username %></strong>
+        <%= post.text %>
+      </div>
+
+      <div class="post-actions">
+        <% if post.participant == @current_user %>
+          <%= link_to(edit_v4_post_path(post), class: 'btn btn-sm btn-info ms-2') { 'Edit' } %>
+          <%= link_to(v4_post_path(post), data: {turbo_method: :delete}, class: 'btn btn-sm btn-danger') { 'Delete' } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

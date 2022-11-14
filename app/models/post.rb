@@ -6,6 +6,10 @@ class Post < ApplicationRecord
 
   # validate :dont_spam
 
+  after_create_commit -> { broadcast_render_to 'posts', partial: 'v4/posts/create', locals: {post: self} }
+  after_destroy_commit -> { broadcast_render_to 'posts', partial: 'v4/posts/destroy', locals: {post: self} }
+  after_update_commit -> { broadcast_update_to 'posts', partial: 'v4/posts/post', locals: {post: self} }
+
   private
 
   def dont_spam
