@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if @current_user
       redirect_to '/v1/posts'
     else
-      redirect_to 'users'
+      redirect_to '/participants'
     end
   end
 end

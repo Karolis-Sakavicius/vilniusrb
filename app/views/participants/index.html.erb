@@ -1,0 +1,25 @@
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+  <%= image_tag 'logo2.png', class: 'me-3', width: 48, height: 48 %>
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Nice header, right?</h1>
+  </div>
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm text-center">
+  <%= image_tag 'logo2.png', class: 'me-3', width: 200, height: 200 %>
+  <h2>Howdy! 👋</h2>
+  <h4>Nice to meet you! What is your name?</h4>
+
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="">
+      <%= form_with url: participants_path, method: :post, class: 'w-100' do |form| %>
+        <div class="form-group mb-2">
+          <%= form.text_field :username, class: 'form-control', placeholder: '' %>
+          <small class="form-text text-danger"><%= @participant&.errors&.messages&.dig(:username)&.join %></small>
+        </div>
+
+        <%= form.submit(class: 'btn btn-success') %>
+      <% end %>
+    </div>
+  </div>
+</div>

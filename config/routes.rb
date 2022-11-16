@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+  resources :participants
+
   namespace :v1 do
     resources :posts
   end

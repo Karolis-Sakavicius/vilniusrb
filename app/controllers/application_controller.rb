@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   private
 
   def load_user
-    @current_user = Participant.last
+    @current_user = cookies[:participant] ? Participant.find_by(uuid: cookies[:participant]) : nil
+
+    unless @current_user
+      redirect_to '/participants'
+    end
   end
 end
