@@ -1,0 +1,31 @@
+<%= render 'shared/header' %>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-0">
+    <h6 class="mb-0">Posts</h6>
+    <%= link_to "Back", v5_posts_path, class: 'btn btn-sm btn-secondary', data: {turbo_action: 'replace'} %>
+  </div>
+
+  <turbo-frame id="new_post">
+    <div class="d-flex text-muted pt-3">
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="<%= @current_user.color %>"/></svg>
+
+      <%= form_with(url: v5_posts_path, method: :post, class: 'w-100', data: {turbo_action: 'replace'}) do |form| %>
+        <strong class="d-block pb-2 mb-0 small lh-sm text-gray-dark">@<%= @current_user.username %></strong>
+
+        <span class="d-block pb-2 mb-0 text-danger fw-bold"><%= @post&.errors&.messages&.dig(:base)&.join %></span>
+
+        <div class="form-group mb-2">
+          <div class="input-group" data-controller="picmo">
+            <%= form.text_field :text, class: 'form-control border-0 border-start border-top border-bottom', placeholder: 'Tell me your thoughts!', value: @post&.text, data: {picmo_target: 'input'} %>
+            <button class="btn btn-light border-end border-top border-bottom" type="button" data-picmo-target="button" data-action="picmo#toggle">😀</button>
+          </div>
+          <small class="form-text text-danger"><%= @post&.errors&.messages&.dig(:text)&.join %></small>
+        </div>
+
+        <%= form.submit(class: 'btn btn-success') { 'Save!' } %>
+        <%= link_to "Cancel", v5_posts_path, class: 'btn btn-secondary', data: {turbo_action: 'replace'} %>
+      <% end %>
+    </div>
+  </turbo-frame>
+</div>

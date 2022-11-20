@@ -1,0 +1,8 @@
+<turbo-stream action="remove" target="<%= dom_id(post) %>">
+</turbo-stream>
+
+<turbo-stream action="update" target="post_count">
+  <template>
+    <%= Post.count %>
+  </template>
+</turbo-stream>
