@@ -4,7 +4,7 @@
   <div class="my-3 p-3 bg-body rounded shadow-sm ugly-animation">
     <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-0">
       <h6 class="mb-0">Posts</h6>
-      <%= link_to "Back", v3_posts_path, class: 'btn btn-sm btn-secondary', data: {turbo_action: 'replace'} %>
+      <%= link_to "Back", v3_posts_path, class: 'btn btn-sm btn-secondary' %>
     </div>
 
     <turbo-frame id="<%= dom_id(@post) %>">
