@@ -1,5 +1,8 @@
 module V3
   class PostsController < ApplicationController
+    before_action :load_post, only: %i[show edit update destroy]
+    before_action :check_ownership, only: %i[update destroy]
+
     def index
       @posts = Post.order(created_at: :desc)
     end
@@ -9,8 +12,6 @@ module V3
     end
 
     def show
-      @post = Post.find(params[:id])
-
       render @post
     end
 
@@ -27,12 +28,9 @@ module V3
     end
 
     def edit
-      @post = Post.find(params[:id])
     end
 
     def update
-      @post = Post.find(params[:id])
-
       if @post.update(post_params)
         render @post
       else
@@ -41,7 +39,7 @@ module V3
     end
 
     def destroy
-      @post = Post.find(params[:id]).destroy!
+      @post.destroy!
 
       respond_to do |format|
         format.turbo_stream
@@ -52,6 +50,16 @@ module V3
 
     def post_params
       params.permit(:text)
+    end
+
+    def load_post
+      @post = Post.find(params[:id])
+    end
+
+    def check_ownership
+      if @post.participant != @current_user
+        head :forbidden
+      end
     end
   end
 end

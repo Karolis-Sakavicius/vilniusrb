@@ -1,5 +1,8 @@
 module V1
   class PostsController < ApplicationController
+    before_action :load_post, only: %i[edit update destroy]
+    before_action :check_ownership, only: %i[update destroy]
+
     def index
       @posts = Post.order(created_at: :desc)
     end
@@ -19,12 +22,9 @@ module V1
     end
 
     def edit
-      @post = Post.find(params[:id])
     end
 
     def update
-      @post = Post.find(params[:id])
-
       if @post.update(post_params)
         redirect_to '/v1/posts'
       else
@@ -33,7 +33,7 @@ module V1
     end
 
     def destroy
-      @post = Post.find(params[:id]).destroy!
+      @post.destroy!
 
       redirect_to '/v1/posts'
     end
@@ -42,6 +42,16 @@ module V1
 
     def post_params
       params.permit(:text)
+    end
+
+    def load_post
+      @post = Post.find(params[:id])
+    end
+
+    def check_ownership
+      if @post.participant != @current_user
+        head :forbidden
+      end
     end
   end
 end
