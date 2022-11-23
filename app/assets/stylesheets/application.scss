@@ -81,4 +81,7 @@ body {
 
 .text-white-50 { color: rgba(255, 255, 255, .5); }
 
-.bg-purple { background-color: #6f42c1; }
+.bg-purple {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
+}
