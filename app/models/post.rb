@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   validates :text, length: {maximum: 256, message: 'So many emotions!!! But try to compress them down to 256 chars. ^_^'}
   validates :text, presence: {message: 'Nothing to share? :-('}
 
-  # validate :dont_spam
+  validate :dont_spam
 
   after_create_commit -> { broadcast_render_to 'posts', partial: 'v4/posts/create', locals: {post: self} }
   after_destroy_commit -> { broadcast_render_to 'posts', partial: 'v4/posts/destroy', locals: {post: self} }
